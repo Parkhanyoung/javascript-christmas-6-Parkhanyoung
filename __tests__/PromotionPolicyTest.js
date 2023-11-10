@@ -48,7 +48,7 @@ describe("이벤트 정책에 대한 테스트", () => {
       [20_000, "산타"],
       [190_000, "산타"],
       [3000, null],
-    ])("총 구매액에 맞게 배지 유형을 계산한다. %s - %s", (amount, badgeType) => {
+    ])("총 혜택 금액에 맞게 배지 유형을 계산한다. %s - %s", (amount, badgeType) => {
       expect(BadgeEvent.apply(amount)).toBe(badgeType);
     });
   });

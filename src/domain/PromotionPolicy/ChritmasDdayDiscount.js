@@ -5,8 +5,8 @@ const ChristmasDdayDiscount = {
 
   apply(bookingDate) {
     const targetDate = bookingDate.getDate();
-
     const discountMultiplier = targetDate - this.START_DATE;
+
     return this.INITIAL_DISCOUNT + this.DISCOUNT_INCREMENT * discountMultiplier;
   },
 };

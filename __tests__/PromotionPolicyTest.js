@@ -1,3 +1,4 @@
+import BadgeEvent from "../src/domain/PromotionPolicy/BadgeEvent.js";
 import ChristmasDdayDiscount from "../src/domain/PromotionPolicy/ChritmasDdayDiscount.js";
 import DailyDiscount from "../src/domain/PromotionPolicy/DailyDiscount.js";
 import SpecialDiscount from "../src/domain/PromotionPolicy/SpecialDiscount.js";
@@ -35,6 +36,20 @@ describe("이벤트 정책에 대한 테스트", () => {
       [new Date("2023-12-25"), 1000],
     ])("날짜에 맞게 할인 금액을 계산한다. %s - %s", (date, discountAmount) => {
       expect(SpecialDiscount.apply(date)).toBe(discountAmount);
+    });
+  });
+
+  describe("배지 증정 이벤트 정책에 대한 테스트.", () => {
+    test.each([
+      [5000, "별"],
+      [8900, "별"],
+      [10_000, "트리"],
+      [17_000, "트리"],
+      [20_000, "산타"],
+      [190_000, "산타"],
+      [3000, null],
+    ])("총 구매액에 맞게 배지 유형을 계산한다. %s - %s", (amount, badgeType) => {
+      expect(BadgeEvent.apply(amount)).toBe(badgeType);
     });
   });
 });

@@ -8,6 +8,7 @@ describe("이벤트 정책에 대한 테스트", () => {
       [new Date("2023-12-06"), 1500],
       [new Date("2023-12-12"), 2100],
       [new Date("2023-12-24"), 3300],
+      [new Date("2023-12-30"), 0],
     ])("날짜에 맞게 할인 금액을 계산한다. %s - %s", (date, discountAmount) => {
       expect(ChristmasDdayDiscount.apply(date)).toBe(discountAmount);
     });

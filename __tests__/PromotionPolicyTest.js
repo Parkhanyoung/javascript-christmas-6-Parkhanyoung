@@ -1,8 +1,9 @@
 import ChristmasDdayDiscount from "../src/domain/PromotionPolicy/ChritmasDdayDiscount.js";
 import DailyDiscount from "../src/domain/PromotionPolicy/DailyDiscount.js";
+import SpecialDiscount from "../src/domain/PromotionPolicy/SpecialDiscount.js";
 
 describe("이벤트 정책에 대한 테스트", () => {
-  describe("Chritmas D-day 할인 정책에 대한 테스트", () => {
+  describe("크리스마스 디데이 할인 정책에 대한 테스트", () => {
     test.each([
       [new Date("2023-12-06"), 1500],
       [new Date("2023-12-12"), 2100],
@@ -23,5 +24,16 @@ describe("이벤트 정책에 대한 테스트", () => {
         expect(DailyDiscount.apply(date, menu)).toBe(discountAmount);
       }
     );
+  });
+
+  describe("특별 할인 정책에 대한 테스트", () => {
+    test.each([
+      [new Date("2023-12-10"), 1000],
+      [new Date("2023-12-13"), 0],
+      [new Date("2023-12-16"), 0],
+      [new Date("2023-12-25"), 1000],
+    ])("날짜에 맞게 할인 금액을 계산한다. %s - %s", (date, discountAmount) => {
+      expect(SpecialDiscount.apply(date)).toBe(discountAmount);
+    });
   });
 });

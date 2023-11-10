@@ -1,6 +1,7 @@
 import BadgeEvent from "../src/domain/PromotionPolicy/BadgeEvent.js";
 import ChristmasDdayDiscount from "../src/domain/PromotionPolicy/ChritmasDdayDiscount.js";
 import DailyDiscount from "../src/domain/PromotionPolicy/DailyDiscount.js";
+import GiftEvent from "../src/domain/PromotionPolicy/GiftEvent.js";
 import SpecialDiscount from "../src/domain/PromotionPolicy/SpecialDiscount.js";
 
 describe("이벤트 정책에 대한 테스트", () => {
@@ -39,7 +40,7 @@ describe("이벤트 정책에 대한 테스트", () => {
     });
   });
 
-  describe("배지 증정 이벤트 정책에 대한 테스트.", () => {
+  describe("배지 증정 이벤트 정책에 대한 테스트", () => {
     test.each([
       [5000, "별"],
       [8900, "별"],
@@ -50,6 +51,16 @@ describe("이벤트 정책에 대한 테스트", () => {
       [3000, null],
     ])("총 혜택 금액에 맞게 배지 유형을 계산한다. %s - %s", (amount, badgeType) => {
       expect(BadgeEvent.apply(amount)).toBe(badgeType);
+    });
+  });
+
+  describe("샴페인 증정 이벤트 정책에 대한 테스트", () => {
+    test.each([
+      [100_000, false],
+      [200_000, true],
+      [20_000, false],
+    ])("총 주문 금액에 맞게 샴페인 증정 여부를 계산한다. %s - %s", (orderAmount, isApplicable) => {
+      expect(GiftEvent.apply(orderAmount)).toBe(isApplicable);
     });
   });
 });

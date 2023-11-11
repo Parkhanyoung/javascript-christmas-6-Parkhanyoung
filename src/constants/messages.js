@@ -2,7 +2,7 @@ const errorMessage = (message) => `[ERROR] ${message}`;
 
 const ERROR_MESSAGE = {
   invalidOrder: errorMessage("유효하지 않은 주문입니다. 다시 입력해 주세요."),
-  overMaxMenuCount: (maxCount) =>
+  overMaxOrderCount: (maxCount) =>
     errorMessage(`한 번에 ${maxCount}개를 초과하여 주문할 수 없습니다.`),
 };
 

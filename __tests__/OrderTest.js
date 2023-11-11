@@ -29,6 +29,7 @@ describe("Order 클래스에 대한 테스트", () => {
       getOrderInput("크림브륄레", 4),
       getOrderInput("고량주", 2),
     ];
+
     test.each(wrongInputs)("%s -> error", (orderInput) => {
       expect(() => new Order(orderInput)).toThrow("[ERROR]");
     });
@@ -40,6 +41,7 @@ describe("Order 클래스에 대한 테스트", () => {
       getOrderInput(MENU_NAME.barbecueRibs, -2),
       getOrderInput(MENU_NAME.chocolateCake, -100),
     ];
+
     test.each(wrongInputs)("%s -> error", (orderInput) => {
       expect(() => new Order(orderInput)).toThrow("[ERROR]");
     });
@@ -47,6 +49,7 @@ describe("Order 클래스에 대한 테스트", () => {
 
   describe("형식에 어긋나는 입력값에 대해 예외 처리한다.", () => {
     const wrongInputs = ["티본 스테이크-1", "티본스테이크 - 1", "티본스테이크 1", "티본스테이크1"];
+
     test.each(wrongInputs)("%s -> error", (orderInput) => {
       expect(() => new Order(orderInput)).toThrow("[ERROR]");
     });

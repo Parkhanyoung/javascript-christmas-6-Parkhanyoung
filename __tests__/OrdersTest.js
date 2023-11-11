@@ -99,7 +99,45 @@ describe("Orders 클래스에 대한 테스트", () => {
     });
   });
 
-  describe("", () => {
-    describe("", () => {});
+  describe("올바르지 않은 값에 대해 예외 처리한다.", () => {
+    describe("음료만 주문 시 예외 처리한다.", () => {
+      const wrongOrders1 = [getOrder(MENU_NAME.champagne, 2)];
+      const wrongOrders2 = [getOrder(MENU_NAME.champagne, 1), getOrder(MENU_NAME.redWine, 3)];
+
+      test.each([[wrongOrders1], [wrongOrders2]])("%s -> error", (orders) => {
+        expect(() => new Orders(orders)).toThrow("[ERROR]");
+      });
+    });
+
+    describe("총 20개를 초과하여 주문 시 예외 처리한다.", () => {
+      const wrongOrders1 = [getOrder(MENU_NAME.tBoneSteak, 21)];
+      const wrongOrders2 = [
+        getOrder(MENU_NAME.mushroomSoup, 10),
+        getOrder(MENU_NAME.barbecueRibs, 6),
+        getOrder(MENU_NAME.redWine, 5),
+      ];
+
+      test.each([[wrongOrders1], [wrongOrders2]])("%s -> error", (orders) => {
+        expect(() => new Orders(orders)).toThrow("[ERROR]");
+      });
+    });
+
+    describe("중복된 주문이 존재할 시 예외 처리한다.", () => {
+      const wrongOrders1 = [
+        getOrder(MENU_NAME.caesarSalad, 2),
+        getOrder(MENU_NAME.barbecueRibs, 2),
+        getOrder(MENU_NAME.barbecueRibs, 3),
+      ];
+
+      const wrongOrders2 = [
+        getOrder(MENU_NAME.barbecueRibs, 2),
+        getOrder(MENU_NAME.champagne, 2),
+        getOrder(MENU_NAME.champagne, 1),
+      ];
+
+      test.each([[wrongOrders1], [wrongOrders2]])("%s -> error", (orders) => {
+        expect(() => new Orders(orders)).toThrow("[ERROR]");
+      });
+    });
   });
 });

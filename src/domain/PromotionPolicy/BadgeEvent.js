@@ -5,14 +5,14 @@ const BadgeEvent = {
     { min: 20_000, max: null, badgeType: "산타" },
   ],
 
-  apply(discountAmount) {
-    const badgeType = this.getBadgeType(discountAmount);
+  apply(benefitAmount) {
+    const badgeType = this.getBadgeType(benefitAmount);
     return badgeType;
   },
 
-  getBadgeType(discountAmount) {
+  getBadgeType(benefitAmount) {
     return this.BADGE_THRESHOLD.reduce((acc, { min, max, badgeType }) => {
-      const isInRange = min <= discountAmount && (!max || discountAmount <= max);
+      const isInRange = min <= benefitAmount && (!max || benefitAmount <= max);
       return isInRange ? badgeType : acc;
     }, null);
   },

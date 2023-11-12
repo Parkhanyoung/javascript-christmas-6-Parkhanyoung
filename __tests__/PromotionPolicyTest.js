@@ -1,8 +1,10 @@
-import BadgeEvent from "../src/domain/PromotionPolicy/BadgeEvent.js";
-import ChristmasDdayDiscount from "../src/domain/PromotionPolicy/ChritmasDdayDiscount.js";
-import DailyDiscount from "../src/domain/PromotionPolicy/DailyDiscount.js";
-import GiftEvent from "../src/domain/PromotionPolicy/GiftEvent.js";
-import SpecialDiscount from "../src/domain/PromotionPolicy/SpecialDiscount.js";
+import {
+  BadgeEvent,
+  ChristmasDdayDiscount,
+  DailyDiscount,
+  GiftEvent,
+  SpecialDiscount,
+} from "../src/domain/PromotionPolicy";
 
 describe("이벤트 정책에 대한 테스트", () => {
   describe("크리스마스 디데이 할인 정책에 대한 테스트", () => {

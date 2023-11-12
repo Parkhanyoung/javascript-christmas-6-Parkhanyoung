@@ -1,6 +1,6 @@
 import DecemberDate from "../src/domain/DecemberDate";
 
-describe("DecemberDate 클래스를 테스트한다.", () => {
+describe("DecemberDate 클래스에 대한 테스트", () => {
   describe("올바르지 않은 날짜에 대해 예외 처리한다.", () => {
     const WRONG_INPUT_1 = "0";
     const WRONG_INPUT_2 = "32";

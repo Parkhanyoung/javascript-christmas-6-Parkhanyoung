@@ -1,12 +1,14 @@
 import { DAY } from "../../constants/date.js";
+import { MENU_CATEGORY } from "../../constants/menu.js";
 
 const DailyDiscount = {
   DISCOUNT_PER_MENU: 2023,
 
-  apply(bookingDate, menuCount) {
-    const { dessert: dessertCount, main: mainCount } = menuCount;
+  apply(visitDate, countPerCategory) {
+    const dessertCount = countPerCategory[MENU_CATEGORY.dessert] || 0;
+    const mainCount = countPerCategory[MENU_CATEGORY.main] || 0;
 
-    const isWeekend = this.checkIsWeekend(bookingDate);
+    const isWeekend = this.checkIsWeekend(visitDate);
     const weekDayDiscount = this.DISCOUNT_PER_MENU * dessertCount;
     const weekendDiscount = this.DISCOUNT_PER_MENU * mainCount;
 

@@ -1,3 +1,4 @@
+import { MENU_CATEGORY } from "../src/constants/menu";
 import {
   BadgeEvent,
   ChristmasDdayDiscount,
@@ -20,9 +21,9 @@ describe("이벤트 정책에 대한 테스트", () => {
 
   describe("Daily(평일/주말) 할인 정책에 대한 테스트", () => {
     test.each([
-      [new Date("2023-12-10"), { dessert: 3, main: 2 }, 6069],
-      [new Date("2023-12-16"), { dessert: 5, main: 2 }, 4046],
-      [new Date("2023-12-25"), { dessert: 1, main: 4 }, 2023],
+      [new Date("2023-12-10"), { [MENU_CATEGORY.dessert]: 3, [MENU_CATEGORY.main]: 2 }, 6069],
+      [new Date("2023-12-16"), { [MENU_CATEGORY.dessert]: 5, [MENU_CATEGORY.main]: 2 }, 4046],
+      [new Date("2023-12-25"), { [MENU_CATEGORY.dessert]: 1, [MENU_CATEGORY.main]: 4 }, 2023],
     ])(
       "날짜와 주문한 메뉴 정보에 맞게 할인 금액을 계산한다. %s, %s - %s원",
       (date, menu, discountAmount) => {

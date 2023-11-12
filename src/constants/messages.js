@@ -4,6 +4,8 @@ const ERROR_MESSAGE = {
   invalidOrder: errorMessage("유효하지 않은 주문입니다. 다시 입력해 주세요."),
   overMaxOrderCount: (maxCount) =>
     errorMessage(`한 번에 ${maxCount}개를 초과하여 주문할 수 없습니다.`),
+
+  invalidDate: errorMessage("유효하지 않은 날짜입니다. 다시 입력해 주세요."),
 };
 
 // 개발적 이슈에 대한 에러 메시지

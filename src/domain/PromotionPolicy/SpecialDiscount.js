@@ -3,8 +3,8 @@ import { DAY } from "../../constants/date.js";
 const SpecialDiscount = {
   DISCOUNT_AMOUNT: 1000,
 
-  apply(bookingDate) {
-    const isApplicable = this.checkIsApplicable(bookingDate);
+  apply(visitDate) {
+    const isApplicable = this.checkIsApplicable(visitDate);
     return isApplicable ? this.DISCOUNT_AMOUNT : 0;
   },
 

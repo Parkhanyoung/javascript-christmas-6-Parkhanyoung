@@ -4,8 +4,8 @@ const ChristmasDdayDiscount = {
   DISCOUNT_INCREMENT: 100,
   INITIAL_DISCOUNT: 1000,
 
-  apply(bookingDate) {
-    const targetDate = bookingDate.getDate();
+  apply(visitDate) {
+    const targetDate = visitDate.getDate();
 
     if (!this.checkIsBeforeDday(targetDate)) {
       return 0;

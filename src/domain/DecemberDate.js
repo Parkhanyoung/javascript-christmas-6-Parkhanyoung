@@ -19,7 +19,9 @@ class DecemberDate {
   }
 
   static #parse(value) {
-    return parseInt(value, 10);
+    const isLessThanTen = value < 10;
+    const date = isLessThanTen ? `0${value}` : value;
+    return new Date(`2023-12-${date}`);
   }
 
   static #testPositiveIntRegex(input) {

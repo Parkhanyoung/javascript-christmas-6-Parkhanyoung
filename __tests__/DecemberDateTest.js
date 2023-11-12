@@ -15,14 +15,14 @@ describe("DecemberDate 클래스에 대한 테스트", () => {
     );
   });
 
-  describe("올바른 날짜에 대해 숫자형으로 변환한다.", () => {
-    const CASE_1 = ["1", 1];
-    const CASE_2 = ["14", 14];
-    const CASE_3 = ["22", 22];
-    const CASE_4 = ["31", 31];
+  describe("올바른 날짜에 대해 12월 Date 객체로 변환한다.", () => {
+    const CASE_1 = ["1", new Date("2023-12-01")];
+    const CASE_2 = ["14", new Date("2023-12-14")];
+    const CASE_3 = ["22", new Date("2023-12-22")];
+    const CASE_4 = ["31", new Date("2023-12-31")];
 
-    test.each([CASE_1, CASE_2, CASE_3, CASE_4])("%s -> %s", (input, number) => {
-      expect(new DecemberDate(input).getValue()).toBe(number);
+    test.each([CASE_1, CASE_2, CASE_3, CASE_4])("%s -> %s", (input, date) => {
+      expect(new DecemberDate(input).getValue()).toBe(date);
     });
   });
 });

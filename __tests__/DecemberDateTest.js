@@ -22,7 +22,7 @@ describe("DecemberDate 클래스에 대한 테스트", () => {
     const CASE_4 = ["31", new Date("2023-12-31")];
 
     test.each([CASE_1, CASE_2, CASE_3, CASE_4])("%s -> %s", (input, date) => {
-      expect(new DecemberDate(input).getValue()).toBe(date);
+      expect(new DecemberDate(input).getValue()).toEqual(date);
     });
   });
 });

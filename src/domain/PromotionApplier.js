@@ -28,12 +28,11 @@ const PromotionApplier = {
   },
 
   getDiscountAndEventResult(visitDate, orders) {
-    const orderAmount = orders.getAmount();
     const countPerCategory = orders.getCountPerCategory();
-
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 
-    const discountAmount = this.calculateAmount(discount);
+    const orderAmount = orders.getAmount();
+    const discountAmount = this.calculateValueAmount(discount);
     const eventResult = this.cacluateEvent(orderAmount, discountAmount);
 
     return {
@@ -71,12 +70,12 @@ const PromotionApplier = {
     };
   },
 
-  calculateAmount(discount) {
-    if (!discount) return 0;
+  calculateValueAmount(object) {
+    if (!object) return 0;
 
-    const discounts = Object.values(discount);
-    const discountAmount = discounts.reduce((sum, discount) => sum + discount, 0);
-    return discountAmount;
+    const values = Object.values(object);
+    const amount = values.reduce((sum, value) => sum + value, 0);
+    return amount;
   },
 };
 

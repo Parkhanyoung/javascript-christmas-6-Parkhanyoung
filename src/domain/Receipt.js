@@ -64,14 +64,14 @@ class Receipt {
 
   #getAmountAfterDiscount() {
     const { discount } = this.#promotion;
-    const discountAmount = PromotionApplier.calculateAmount(discount);
+    const discountAmount = PromotionApplier.calculateValueAmount(discount);
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
     return amountBeforeDiscount - discountAmount;
   }
 
   #getBenefitAmount() {
     const benefit = this.#getAppliedBenefit();
-    const benefitAmount = PromotionApplier.calculateAmount(benefit);
+    const benefitAmount = PromotionApplier.calculateValueAmount(benefit);
     return benefitAmount;
   }
 

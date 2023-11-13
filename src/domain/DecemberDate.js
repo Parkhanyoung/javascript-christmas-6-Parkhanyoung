@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants/messages";
+import { ERROR_MESSAGE } from "../constants/messages.js";
 
 class DecemberDate {
   static MIN_DATE = 1;

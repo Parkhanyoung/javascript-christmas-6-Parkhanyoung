@@ -1,5 +1,5 @@
-import { MENU_NAME, PRICE_FOR_MENUNAME } from "../constants/menu";
-import PromotionApplier from "./PromotionApplier";
+import { MENU_NAME, PRICE_FOR_MENUNAME } from "../constants/menu.js";
+import PromotionApplier from "./PromotionApplier.js";
 
 class Receipt {
   static #GIFT = {
@@ -41,7 +41,7 @@ class Receipt {
   #getGift() {
     const isGiven = this.#promotion.eventResult?.isGiftGiven;
     const { name, count } = Receipt.#GIFT;
-    const gift = { name, count };
+    const gift = { [name]: count };
 
     return isGiven ? gift : null;
   }

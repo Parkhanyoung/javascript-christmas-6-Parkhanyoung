@@ -30,8 +30,8 @@ const ChristmasPromotion = {
     return new Orders(orders);
   },
 
-  getOrderResult(date, orders) {
-    const receipt = new Receipt(date.getValue(), orders).getDetail();
+  getOrderResult(decemberDate, orders) {
+    const receipt = new Receipt(decemberDate.getValue(), orders).getDetail();
     return receipt;
   },
 

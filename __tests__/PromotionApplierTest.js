@@ -23,7 +23,7 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
       {
         discount: {
           christmasDdayDiscount: 1400,
-          dailyDiscount: 0,
+          weekdayDiscount: 0,
           specialDiscount: 0,
         },
         eventResult: {
@@ -43,7 +43,7 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
       {
         discount: {
           christmasDdayDiscount: 3300,
-          dailyDiscount: 6069,
+          weekdayDiscount: 6069,
           specialDiscount: 1000,
         },
         eventResult: {
@@ -64,7 +64,7 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
       {
         discount: {
           christmasDdayDiscount: 0,
-          dailyDiscount: 6069,
+          weekdayDiscount: 6069,
           specialDiscount: 1000,
         },
         eventResult: {

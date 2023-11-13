@@ -5,7 +5,7 @@ import {
   SpecialDiscount,
   BadgeEvent,
   GiftEvent,
-} from "./PromotionPolicy";
+} from "./PromotionPolicy/index.js";
 
 const PromotionApplier = {
   MIN_ORDER_AMOUNT: 10_000,
@@ -44,12 +44,15 @@ const PromotionApplier = {
 
   calculateDiscount(visitDate, countPerCategory) {
     const christmasDdayDiscount = ChristmasDdayDiscount.apply(visitDate);
+
     const dailyDiscount = DailyDiscount.apply(visitDate, countPerCategory);
+    const [dailyDiscountType, dailyDiscountAMount] = Object.entries(dailyDiscount)[0];
+
     const specialDiscount = SpecialDiscount.apply(visitDate);
 
     return {
       christmasDdayDiscount,
-      dailyDiscount,
+      [dailyDiscountType]: dailyDiscountAMount,
       specialDiscount,
     };
   },

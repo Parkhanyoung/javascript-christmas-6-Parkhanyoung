@@ -1,13 +1,6 @@
-import { MENU_NAME, PRICE_FOR_MENUNAME } from "../constants/menu.js";
 import EventApplier from "./EventApplier.js";
 
 class Receipt {
-  static #GIFT = {
-    name: MENU_NAME.champagne,
-    price: PRICE_FOR_MENUNAME[MENU_NAME.champagne],
-    count: 1,
-  };
-
   #orders;
   #eventResult;
 
@@ -40,26 +33,16 @@ class Receipt {
 
   #getGift() {
     const isGiven = this.#eventResult.giving?.isGiftGiven;
-    const { name, count } = Receipt.#GIFT;
-    const gift = { [name]: count };
-
-    return isGiven ? gift : null;
+    const gift = EventApplier.getGift(isGiven);
+    return gift;
   }
 
   #getAppliedBenefit() {
     const { discount } = this.#eventResult;
+    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
 
-    const benefit = { ...discount };
-
-    const isGiven = this.#eventResult.giving?.isGiftGiven;
-
-    if (isGiven) {
-      benefit.gift = Receipt.#GIFT.price;
-    }
-
-    if (!discount && !isGiven) return null;
-
-    return benefit;
+    const appliedBenefit = EventApplier.getAppliedBenefit(discount, isGiftGiven);
+    return appliedBenefit;
   }
 
   #getAmountAfterDiscount() {

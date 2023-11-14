@@ -8,6 +8,12 @@ import {
 } from "./EventPolicy/index.js";
 
 const EventApplier = {
+  GIFT: {
+    name: MENU_NAME.champagne,
+    price: PRICE_FOR_MENUNAME[MENU_NAME.champagne],
+    count: 1,
+  },
+
   MIN_ORDER_AMOUNT: 10_000,
 
   apply(visitDate, orders) {
@@ -18,8 +24,28 @@ const EventApplier = {
       };
     }
 
-    const result = this.getDiscountAndGivingResult(visitDate, orders);
+    const result = this.getDiscountAndGiving(visitDate, orders);
     return result;
+  },
+
+  getGift(isGiven) {
+    const { name, count } = this.GIFT;
+    const gift = { [name]: count };
+
+    return isGiven ? gift : null;
+  },
+
+  getAppliedBenefit(discount, isGiftGiven) {
+    if (!discount && !isGiftGiven) {
+      return null;
+    }
+
+    if (!isGiftGiven) {
+      return discount;
+    }
+
+    const benefit = { ...discount, gift: this.GIFT.price };
+    return benefit;
   },
 
   isApplicable(orders) {
@@ -27,7 +53,7 @@ const EventApplier = {
     return orderAmount >= this.MIN_ORDER_AMOUNT;
   },
 
-  getDiscountAndGivingResult(visitDate, orders) {
+  getDiscountAndGiving(visitDate, orders) {
     const countPerCategory = orders.getCountPerCategory();
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 

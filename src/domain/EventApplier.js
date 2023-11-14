@@ -18,21 +18,22 @@ const EventApplier = {
 
   apply(visitDate, orders) {
     if (!this.isApplicable(orders)) {
-      return {
-        dicount: null,
-        giving: null,
-      };
+      return null;
     }
 
-    const result = this.getDiscountAndGiving(visitDate, orders);
-    return result;
+    const eventResult = this.getDiscountAndGiving(visitDate, orders);
+    return eventResult;
   },
 
-  getGift(isGiven) {
+  getGift(isGiftGiven) {
     const { name, count } = this.GIFT;
     const gift = { [name]: count };
 
-    return isGiven ? gift : null;
+    if (!isGiftGiven) {
+      return null;
+    }
+
+    return gift;
   },
 
   getAppliedBenefit(discount, isGiftGiven) {
@@ -44,12 +45,13 @@ const EventApplier = {
       return discount;
     }
 
-    const benefit = { ...discount, gift: this.GIFT.price };
-    return benefit;
+    const appliedBenefit = { ...discount, gift: this.GIFT.price };
+    return appliedBenefit;
   },
 
   isApplicable(orders) {
     const orderAmount = orders.getAmount();
+
     return orderAmount >= this.MIN_ORDER_AMOUNT;
   },
 
@@ -98,7 +100,9 @@ const EventApplier = {
   },
 
   calculateValueAmount(object) {
-    if (!object) return 0;
+    if (!object) {
+      return 0;
+    }
 
     const values = Object.values(object);
     const amount = values.reduce((sum, value) => sum + value, 0);

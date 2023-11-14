@@ -32,22 +32,22 @@ class Receipt {
   }
 
   #getGift() {
-    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
+    const isGiftGiven = this.#eventResult?.giving?.isGiftGiven;
 
     const gift = EventApplier.getGift(isGiftGiven);
     return gift;
   }
 
   #getAppliedBenefit() {
-    const { discount } = this.#eventResult;
-    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
+    const discount = this.#eventResult?.discount;
+    const isGiftGiven = this.#eventResult?.giving?.isGiftGiven;
 
     const appliedBenefit = EventApplier.getAppliedBenefit(discount, isGiftGiven);
     return appliedBenefit;
   }
 
   #getAmountAfterDiscount() {
-    const { discount } = this.#eventResult;
+    const discount = this.#eventResult?.discount;
 
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
     const discountAmount = EventApplier.calculateValueAmount(discount);
@@ -63,7 +63,7 @@ class Receipt {
   }
 
   #getBadge() {
-    const badge = this.#eventResult.giving?.badge;
+    const badge = this.#eventResult?.giving?.badge;
 
     if (!badge) {
       return null;

@@ -1,4 +1,5 @@
 import { MENU_NAME, PRICE_FOR_MENUNAME } from "../constants/menu.js";
+import { sumObjectValues } from "../utils/sumObjectValues.js";
 import {
   ChristmasDdayDiscount,
   DailyDiscount,
@@ -28,11 +29,15 @@ const EventApplier = {
     return result;
   },
 
-  getGift(isGiven) {
+  getGift(isGiftGiven) {
     const { name, count } = this.GIFT;
-    const gift = { [name]: count };
 
-    return isGiven ? gift : null;
+    if (!isGiftGiven) {
+      return null;
+    }
+
+    const gift = { [name]: count };
+    return gift;
   },
 
   getAppliedBenefit(discount, isGiftGiven) {
@@ -58,7 +63,7 @@ const EventApplier = {
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 
     const orderAmount = orders.getAmount();
-    const discountAmount = this.calculateValueAmount(discount);
+    const discountAmount = sumObjectValues(discount);
     const giving = this.calculateGiving(orderAmount, discountAmount);
 
     return {
@@ -95,14 +100,6 @@ const EventApplier = {
       isGiftGiven,
       badge,
     };
-  },
-
-  calculateValueAmount(object) {
-    if (!object) return 0;
-
-    const values = Object.values(object);
-    const amount = values.reduce((sum, value) => sum + value, 0);
-    return amount;
   },
 };
 

@@ -1,3 +1,4 @@
+import { sumObjectValues } from "../utils/sumObjectValues.js";
 import EventApplier from "./EventApplier.js";
 
 class Receipt {
@@ -50,7 +51,7 @@ class Receipt {
     const { discount } = this.#eventResult;
 
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
-    const discountAmount = EventApplier.calculateValueAmount(discount);
+    const discountAmount = sumObjectValues(discount);
 
     return amountBeforeDiscount - discountAmount;
   }
@@ -58,7 +59,7 @@ class Receipt {
   #getBenefitAmount() {
     const benefit = this.#getAppliedBenefit();
 
-    const benefitAmount = EventApplier.calculateValueAmount(benefit);
+    const benefitAmount = sumObjectValues(benefit);
     return benefitAmount;
   }
 

@@ -1,9 +1,9 @@
-import InputView from "../view/InputView.js";
+import Order from "../domain/Order.js";
+import Orders from "../domain/Orders.js";
+import Receipt from "../domain/Receipt.js";
 import DecemberDate from "../domain/DecemberDate.js";
 import OrdersParser from "../domain/OrdersParser.js";
-import Orders from "../domain/Orders.js";
-import Order from "../domain/Order.js";
-import Receipt from "../domain/Receipt.js";
+import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import { tryUntillSuccess } from "../utils/tryUntillSuccess.js";
 
@@ -18,21 +18,22 @@ const ChristmasEvent = {
 
   async getDateFromUser() {
     const input = await InputView.readDate();
+    const decemberDate = new DecemberDate(input);
 
-    return new DecemberDate(input).getValue();
+    return decemberDate.getValue();
   },
 
   async getOrdersFromUser() {
     const input = await InputView.readOrders();
-    const parsedOrderInput = await OrdersParser.parse(input);
-    const orders = parsedOrderInput.map((order) => new Order(order));
+    const splitedInput = await OrdersParser.parse(input);
+    const orders = splitedInput.map((order) => new Order(order));
 
     return new Orders(orders);
   },
 
   getOrderResult(date, orders) {
-    const receipt = new Receipt(date, orders).getDetail();
-    return receipt;
+    const receipt = new Receipt(date, orders);
+    return receipt.getDetail();
   },
 
   printOrderResult(date, orderResult) {

@@ -3,22 +3,22 @@ import {
   ChristmasDdayDiscount,
   DailyDiscount,
   SpecialDiscount,
-  BadgeEvent,
-  GiftEvent,
-} from "./PromotionPolicy/index.js";
+  BadgeGiving,
+  GiftGiving,
+} from "./EventPolicy/index.js";
 
-const PromotionApplier = {
+const EventApplier = {
   MIN_ORDER_AMOUNT: 10_000,
 
   apply(visitDate, orders) {
     if (!this.isApplicable(orders)) {
       return {
         dicount: null,
-        eventResult: null,
+        giving: null,
       };
     }
 
-    const result = this.getDiscountAndEventResult(visitDate, orders);
+    const result = this.getDiscountAndGivingResult(visitDate, orders);
     return result;
   },
 
@@ -27,17 +27,17 @@ const PromotionApplier = {
     return orderAmount >= this.MIN_ORDER_AMOUNT;
   },
 
-  getDiscountAndEventResult(visitDate, orders) {
+  getDiscountAndGivingResult(visitDate, orders) {
     const countPerCategory = orders.getCountPerCategory();
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 
     const orderAmount = orders.getAmount();
     const discountAmount = this.calculateValueAmount(discount);
-    const eventResult = this.cacluateEvent(orderAmount, discountAmount);
+    const giving = this.calculateGiving(orderAmount, discountAmount);
 
     return {
       discount,
-      eventResult,
+      giving,
     };
   },
 
@@ -56,17 +56,18 @@ const PromotionApplier = {
     };
   },
 
-  cacluateEvent(orderAmount, discountAmount) {
-    const isGiftGiven = GiftEvent.apply(orderAmount);
+  calculateGiving(orderAmount, discountAmount) {
+    const isGiftGiven = GiftGiving.apply(orderAmount);
 
     const GIFT_PRICE = PRICE_FOR_MENUNAME[MENU_NAME.champagne];
+
     const giftAmount = isGiftGiven ? GIFT_PRICE : 0;
     const benefitAmount = discountAmount + giftAmount;
-    const eventBadge = BadgeEvent.apply(benefitAmount);
+    const badge = BadgeGiving.apply(benefitAmount);
 
     return {
       isGiftGiven,
-      eventBadge,
+      badge,
     };
   },
 
@@ -79,4 +80,4 @@ const PromotionApplier = {
   },
 };
 
-export default PromotionApplier;
+export default EventApplier;

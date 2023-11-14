@@ -1,4 +1,4 @@
-import OrdersParser from "../src/domain/OrdersParser";
+import OrdersParser from "../src/domain/OrdersParser.js";
 
 describe("OrdersParser 객체에 대한 테스트", () => {
   describe("올바르지 않은 입력값에 예외 처리한다.", () => {

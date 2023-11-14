@@ -1,6 +1,6 @@
-import { MENU_CATEGORY, MENU_NAME } from "../src/constants/menu";
+import { MENU_CATEGORY, MENU_NAME } from "../src/constants/menu.js";
 import Order from "../src/domain/Order.js";
-import Orders from "../src/domain/Orders";
+import Orders from "../src/domain/Orders.js";
 
 const getOrder = (menuName, count) => new Order(`${menuName}-${count}`);
 const getOrders = (ordersCase) =>

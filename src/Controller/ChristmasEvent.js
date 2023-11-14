@@ -7,7 +7,7 @@ import Receipt from "../domain/Receipt.js";
 import OutputView from "../view/OutputView.js";
 import { tryUntillSuccess } from "../utils/tryUntillSuccess.js";
 
-const ChristmasPromotion = {
+const ChristmasEvent = {
   async init() {
     const date = await tryUntillSuccess(this.getDateFromUser)();
     const orders = await tryUntillSuccess(this.getOrdersFromUser)();
@@ -47,4 +47,4 @@ const ChristmasPromotion = {
   },
 };
 
-export default ChristmasPromotion;
+export default ChristmasEvent;

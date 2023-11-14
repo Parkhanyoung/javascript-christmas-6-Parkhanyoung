@@ -1,17 +1,17 @@
 import Order from "../src/domain/Order.js";
 import Orders from "../src/domain/Orders.js";
-import PromotionApplier from "../src/domain/PromotionApplier.js";
+import EventApplier from "../src/domain/EventApplier.js";
 
-describe("PromotionApplier 객체에 대한 테스트", () => {
+describe("EventApplier 객체에 대한 테스트", () => {
   describe("총 주문 금액이 10,000원 이하일 경우, 프로모션을 적용하지 않는다.", () => {
     const ORDERS_1 = new Orders([new Order("아이스크림-1")]);
     const ORDERS_2 = new Orders([new Order("타파스-1"), new Order("제로콜라-1")]);
     const ORDERS_3 = new Orders([new Order("양송이수프-1"), new Order("제로콜라-1")]);
 
     test.each([ORDERS_1, ORDERS_2, ORDERS_3])("Case %#", (orders) => {
-      expect(PromotionApplier.apply(new Date("2023-12-12"), orders)).toEqual({
+      expect(EventApplier.apply(new Date("2023-12-12"), orders)).toEqual({
         dicount: null,
-        eventResult: null,
+        giving: null,
       });
     });
   });
@@ -26,9 +26,9 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
           weekdayDiscount: 0,
           specialDiscount: 0,
         },
-        eventResult: {
+        giving: {
           isGiftGiven: false,
-          eventBadge: null,
+          badge: null,
         },
       },
     ];
@@ -46,9 +46,9 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
           weekdayDiscount: 6069,
           specialDiscount: 1000,
         },
-        eventResult: {
+        giving: {
           isGiftGiven: false,
-          eventBadge: "트리",
+          badge: "트리",
         },
       },
     ];
@@ -67,15 +67,15 @@ describe("PromotionApplier 객체에 대한 테스트", () => {
           weekdayDiscount: 6069,
           specialDiscount: 1000,
         },
-        eventResult: {
+        giving: {
           isGiftGiven: true,
-          eventBadge: "산타",
+          badge: "산타",
         },
       },
     ];
 
     test.each([CASE_1, CASE_2, CASE_3])("Case %#", (date, orders, promotionResult) => {
-      expect(PromotionApplier.apply(date, orders)).toEqual(promotionResult);
+      expect(EventApplier.apply(date, orders)).toEqual(promotionResult);
     });
   });
 });

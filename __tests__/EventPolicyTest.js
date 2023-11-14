@@ -1,11 +1,11 @@
-import { MENU_CATEGORY } from "../src/constants/menu";
+import { MENU_CATEGORY } from "../src/constants/menu.js";
 import {
-  BadgeEvent,
+  BadgeGiving,
   ChristmasDdayDiscount,
   DailyDiscount,
-  GiftEvent,
+  GiftGiving,
   SpecialDiscount,
-} from "../src/domain/PromotionPolicy";
+} from "../src/domain/EventPolicy/index.js";
 
 describe("이벤트 정책에 대한 테스트", () => {
   describe("크리스마스 디데이 할인 정책에 대한 테스트", () => {
@@ -68,7 +68,7 @@ describe("이벤트 정책에 대한 테스트", () => {
       [190_000, "산타"],
       [3000, null],
     ])("총 혜택 금액에 맞게 배지 유형을 계산한다. %s - %s", (amount, badgeType) => {
-      expect(BadgeEvent.apply(amount)).toBe(badgeType);
+      expect(BadgeGiving.apply(amount)).toBe(badgeType);
     });
   });
 
@@ -78,7 +78,7 @@ describe("이벤트 정책에 대한 테스트", () => {
       [200_000, true],
       [20_000, false],
     ])("총 주문 금액에 맞게 샴페인 증정 여부를 계산한다. %s - %s", (orderAmount, isApplicable) => {
-      expect(GiftEvent.apply(orderAmount)).toBe(isApplicable);
+      expect(GiftGiving.apply(orderAmount)).toBe(isApplicable);
     });
   });
 });

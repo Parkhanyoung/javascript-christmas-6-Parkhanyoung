@@ -1,7 +1,7 @@
-import DecemberDate from "../src/domain/DecemberDate";
-import Order from "../src/domain/Order";
-import Orders from "../src/domain/Orders";
-import Receipt from "../src/domain/Receipt";
+import DecemberDate from "../src/domain/DecemberDate.js";
+import Order from "../src/domain/Order.js";
+import Orders from "../src/domain/Orders.js";
+import Receipt from "../src/domain/Receipt.js";
 
 describe("Recipt 클래스에 대한 테스트", () => {
   describe("예시로 주어진 케이스와 동일하게 계산한다.", () => {

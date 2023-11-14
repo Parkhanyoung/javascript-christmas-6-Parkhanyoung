@@ -1,4 +1,4 @@
-import DecemberDate from "../src/domain/DecemberDate";
+import DecemberDate from "../src/domain/DecemberDate.js";
 
 describe("DecemberDate 클래스에 대한 테스트", () => {
   describe("올바르지 않은 날짜에 대해 예외 처리한다.", () => {

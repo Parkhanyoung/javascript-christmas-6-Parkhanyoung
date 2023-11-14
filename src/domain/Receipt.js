@@ -1,5 +1,5 @@
 import { MENU_NAME, PRICE_FOR_MENUNAME } from "../constants/menu.js";
-import PromotionApplier from "./PromotionApplier.js";
+import EventApplier from "./EventApplier.js";
 
 class Receipt {
   static #GIFT = {
@@ -9,13 +9,13 @@ class Receipt {
   };
 
   #orders;
-  #promotion;
+  #eventResult;
 
   constructor(visitDate, orders) {
-    const promotion = PromotionApplier.apply(visitDate, orders);
+    const promotion = EventApplier.apply(visitDate, orders);
 
     this.#orders = orders;
-    this.#promotion = promotion;
+    this.#eventResult = promotion;
   }
 
   getDetail() {
@@ -39,7 +39,7 @@ class Receipt {
   }
 
   #getGift() {
-    const isGiven = this.#promotion.eventResult?.isGiftGiven;
+    const isGiven = this.#eventResult.giving?.isGiftGiven;
     const { name, count } = Receipt.#GIFT;
     const gift = { [name]: count };
 
@@ -47,11 +47,11 @@ class Receipt {
   }
 
   #getAppliedBenefit() {
-    const { discount } = this.#promotion;
+    const { discount } = this.#eventResult;
 
     const benefit = { ...discount };
 
-    const isGiven = this.#promotion.eventResult?.isGiftGiven;
+    const isGiven = this.#eventResult.giving?.isGiftGiven;
 
     if (isGiven) {
       benefit.gift = Receipt.#GIFT.price;
@@ -63,20 +63,20 @@ class Receipt {
   }
 
   #getAmountAfterDiscount() {
-    const { discount } = this.#promotion;
-    const discountAmount = PromotionApplier.calculateValueAmount(discount);
+    const { discount } = this.#eventResult;
+    const discountAmount = EventApplier.calculateValueAmount(discount);
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
     return amountBeforeDiscount - discountAmount;
   }
 
   #getBenefitAmount() {
     const benefit = this.#getAppliedBenefit();
-    const benefitAmount = PromotionApplier.calculateValueAmount(benefit);
+    const benefitAmount = EventApplier.calculateValueAmount(benefit);
     return benefitAmount;
   }
 
   #getBadge() {
-    const badge = this.#promotion.eventResult?.eventBadge;
+    const badge = this.#eventResult.giving?.badge;
 
     if (!badge) return null;
 

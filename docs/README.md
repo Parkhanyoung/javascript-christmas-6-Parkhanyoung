@@ -53,7 +53,7 @@
 - [ ] 리팩토링  
     
 ### 추가 구현 및 수정 사항  
-- [ ] Promotion -> Event / Event -> Giving으로 네이밍 변경  
+- [x] Promotion -> Event / Event -> Giving으로 네이밍 변경  
 - [ ] Receipt의 증정품 증정 관련 로직을 최대한 캡슐화해보기  
 - [ ] README에 프로젝트 소개 추가  
   

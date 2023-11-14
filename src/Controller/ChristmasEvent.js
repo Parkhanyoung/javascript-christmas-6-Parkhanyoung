@@ -38,13 +38,13 @@ const ChristmasEvent = {
 
   printOrderResult(date, orderResult) {
     OutputView.printIntro(date.getDate());
-    OutputView.printMenu(orderResult?.orderedMenu);
-    OutputView.printAmountBeforeDiscount(orderResult?.amountBeforeDiscount);
-    OutputView.printGift(orderResult?.gift);
-    OutputView.printAppliedBenefit(orderResult?.appliedBenefit);
-    OutputView.printBenefitAmount(orderResult?.benefitAmount);
-    OutputView.printAmountAfterDiscount(orderResult?.amountAfterDiscount);
-    OutputView.printBadge(orderResult?.badge);
+    OutputView.printMenu(orderResult.orderedMenu);
+    OutputView.printAmountBeforeDiscount(orderResult.amountBeforeDiscount);
+    OutputView.printGift(orderResult.gift);
+    OutputView.printAppliedBenefit(orderResult.appliedBenefit);
+    OutputView.printBenefitAmount(orderResult.benefitAmount);
+    OutputView.printAmountAfterDiscount(orderResult.amountAfterDiscount);
+    OutputView.printBadge(orderResult.badge);
   },
 };
 

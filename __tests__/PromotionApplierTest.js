@@ -9,7 +9,10 @@ describe("EventApplier 객체에 대한 테스트", () => {
     const ORDERS_3 = new Orders([new Order("양송이수프-1"), new Order("제로콜라-1")]);
 
     test.each([ORDERS_1, ORDERS_2, ORDERS_3])("Case %#", (orders) => {
-      expect(EventApplier.apply(new Date("2023-12-12"), orders)).toBe(null);
+      expect(EventApplier.apply(new Date("2023-12-12"), orders)).toEqual({
+        dicount: null,
+        giving: null,
+      });
     });
   });
 

@@ -42,7 +42,10 @@ describe("이벤트 정책에 대한 테스트", () => {
     ])(
       "날짜와 주문한 메뉴 정보에 맞게 할인 금액을 계산한다. %s, %s - %s원",
       (date, menu, discountType, discountAmount) => {
-        expect(DailyDiscount.apply(date, menu)).toEqual({ [discountType]: discountAmount });
+        expect(DailyDiscount.apply(date, menu)).toEqual({
+          type: discountType,
+          amount: discountAmount,
+        });
       }
     );
   });

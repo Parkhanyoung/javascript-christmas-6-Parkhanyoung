@@ -76,13 +76,13 @@ const EventApplier = {
     const christmasDdayDiscount = ChristmasDdayDiscount.apply(visitDate);
 
     const dailyDiscount = DailyDiscount.apply(visitDate, countPerCategory);
-    const [dailyDiscountType, dailyDiscountAMount] = Object.entries(dailyDiscount)[0];
+    const { type: dailyDiscountType, amount: dailyDiscountAmount } = dailyDiscount;
 
     const specialDiscount = SpecialDiscount.apply(visitDate);
 
     return {
       christmasDdayDiscount,
-      [dailyDiscountType]: dailyDiscountAMount,
+      [dailyDiscountType]: dailyDiscountAmount,
       specialDiscount,
     };
   },

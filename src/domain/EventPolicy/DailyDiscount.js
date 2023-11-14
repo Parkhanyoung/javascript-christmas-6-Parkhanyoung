@@ -1,4 +1,5 @@
 import { DAY } from "../../constants/date.js";
+import { EVENT_TYPE } from "../../constants/event.js";
 import { MENU_CATEGORY } from "../../constants/menu.js";
 
 const DailyDiscount = {
@@ -12,7 +13,9 @@ const DailyDiscount = {
     const weekdayDiscount = this.DISCOUNT_PER_MENU * dessertCount;
     const weekendDiscount = this.DISCOUNT_PER_MENU * mainCount;
 
-    return isWeekend ? { weekendDiscount } : { weekdayDiscount };
+    return isWeekend
+      ? { type: EVENT_TYPE.weekendDiscount, amount: weekendDiscount }
+      : { type: EVENT_TYPE.weekdayDiscount, amount: weekdayDiscount };
   },
 
   checkIsWeekend(date) {

@@ -58,7 +58,8 @@ const OutputView = {
 
     const benefits = Object.entries(appliedBenefit);
     const benefitStrings = benefits.map(
-      ([benefitType, amount]) => `${EVENT[benefitType]}: -${amount.toLocaleString()}원`
+      ([benefitType, amount]) =>
+        `${EVENT[benefitType]}: ${amount ? "-" : ""}${amount.toLocaleString()}원`
     );
 
     benefitStrings.forEach((string) => Console.print(string));
@@ -68,7 +69,7 @@ const OutputView = {
 
   printBenefitAmount(benefitAmount) {
     Console.print("<총혜택 금액>");
-    Console.print(`-${benefitAmount.toLocaleString()}원`);
+    Console.print(`${benefitAmount ? "-" : ""}${benefitAmount.toLocaleString()}원`);
     this.printBlankLine();
   },
 

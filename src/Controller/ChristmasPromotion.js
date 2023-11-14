@@ -13,13 +13,13 @@ const ChristmasPromotion = {
     const orders = await tryUntillSuccess(this.getOrdersFromUser)();
 
     const orderResult = this.getOrderResult(date, orders);
-    this.printOrderResult(orderResult);
+    this.printOrderResult(date, orderResult);
   },
 
   async getDateFromUser() {
     const input = await InputView.readDate();
 
-    return new DecemberDate(input);
+    return new DecemberDate(input).getValue();
   },
 
   async getOrdersFromUser() {
@@ -30,13 +30,13 @@ const ChristmasPromotion = {
     return new Orders(orders);
   },
 
-  getOrderResult(decemberDate, orders) {
-    const receipt = new Receipt(decemberDate.getValue(), orders).getDetail();
+  getOrderResult(date, orders) {
+    const receipt = new Receipt(date, orders).getDetail();
     return receipt;
   },
 
-  printOrderResult(orderResult) {
-    OutputView.printIntro();
+  printOrderResult(date, orderResult) {
+    OutputView.printIntro(date.getDate());
     OutputView.printMenu(orderResult.orderedMenu);
     OutputView.printAmountBeforeDiscount(orderResult.amountBeforeDiscount);
     OutputView.printGift(orderResult.gift);

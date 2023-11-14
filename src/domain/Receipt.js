@@ -5,10 +5,10 @@ class Receipt {
   #eventResult;
 
   constructor(visitDate, orders) {
-    const promotion = EventApplier.apply(visitDate, orders);
+    const eventResult = EventApplier.apply(visitDate, orders);
 
     this.#orders = orders;
-    this.#eventResult = promotion;
+    this.#eventResult = eventResult;
   }
 
   getDetail() {
@@ -32,8 +32,9 @@ class Receipt {
   }
 
   #getGift() {
-    const isGiven = this.#eventResult.giving?.isGiftGiven;
-    const gift = EventApplier.getGift(isGiven);
+    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
+
+    const gift = EventApplier.getGift(isGiftGiven);
     return gift;
   }
 
@@ -47,13 +48,16 @@ class Receipt {
 
   #getAmountAfterDiscount() {
     const { discount } = this.#eventResult;
-    const discountAmount = EventApplier.calculateValueAmount(discount);
+
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
+    const discountAmount = EventApplier.calculateValueAmount(discount);
+
     return amountBeforeDiscount - discountAmount;
   }
 
   #getBenefitAmount() {
     const benefit = this.#getAppliedBenefit();
+
     const benefitAmount = EventApplier.calculateValueAmount(benefit);
     return benefitAmount;
   }
@@ -61,7 +65,9 @@ class Receipt {
   #getBadge() {
     const badge = this.#eventResult.giving?.badge;
 
-    if (!badge) return null;
+    if (!badge) {
+      return null;
+    }
 
     return badge;
   }

@@ -43,7 +43,7 @@ const OutputView = {
       return this.printNull();
     }
 
-    const [name, count] = Object.entries(gift)[0];
+    const { name, count } = gift;
 
     Console.print(`${name} ${count}개`);
     this.printBlankLine();

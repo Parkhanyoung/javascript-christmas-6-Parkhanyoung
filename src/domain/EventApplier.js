@@ -36,7 +36,7 @@ const EventApplier = {
       return null;
     }
 
-    const gift = { [name]: count };
+    const gift = { name, count };
     return gift;
   },
 

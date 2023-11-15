@@ -1,5 +1,6 @@
 import { sumObjectValues } from "../utils/sumObjectValues.js";
 import EventApplier from "./EventApplier.js";
+import GiftExchanger from "./GiftExchanger.js";
 
 class Receipt {
   #orders;
@@ -35,7 +36,7 @@ class Receipt {
   #getGift() {
     const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
 
-    const gift = EventApplier.getGift(isGiftGiven);
+    const gift = GiftExchanger.exchange(isGiftGiven);
     return gift;
   }
 
@@ -43,7 +44,7 @@ class Receipt {
     const { discount } = this.#eventResult;
     const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
 
-    const appliedBenefit = EventApplier.getAppliedBenefit(discount, isGiftGiven);
+    const appliedBenefit = GiftExchanger.generateBenefitReport(discount, isGiftGiven);
     return appliedBenefit;
   }
 

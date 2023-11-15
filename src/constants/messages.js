@@ -13,4 +13,28 @@ const DEV_ERROR_MESSAGE = {
   invalidElement: errorMessage("주어진 요소가 요구되는 타입에 부합하지 않습니다."),
 };
 
-export { ERROR_MESSAGE, DEV_ERROR_MESSAGE };
+const CONSOLE_MESSAGE = {
+  // input
+  readOrders:
+    "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)" +
+    "\n",
+
+  // output
+  blank: "",
+  null: "없음",
+  resultIntro: (date) => `12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`,
+  menuInfo: (name, count) => `${name} ${count}개`,
+  amountBeforeDiscountTitle: "<할인 전 총주문 금액>",
+  giftTitle: "<증정 메뉴>",
+  giftInfo: ({ name, count }) => `${name} ${count}개`,
+  appliedBenefitTitle: "<혜택 내역>",
+  benefitAmountTitle: "<총혜택 금액>",
+  amountAfterDiscountTitle: "<할인 후 예상 결제 금액>",
+  negativeSign: (amount) => (amount === 0 ? "" : "-"),
+  won: (amount) => `${amount.toLocaleString()}원`,
+  wonWithNegativeSign: (amount) =>
+    `${CONSOLE_MESSAGE.negativeSign(amount)}${CONSOLE_MESSAGE.won(amount)}`,
+  badgeTitle: "<12월 이벤트 배지>",
+};
+
+export { ERROR_MESSAGE, DEV_ERROR_MESSAGE, CONSOLE_MESSAGE };

@@ -9,6 +9,7 @@ class DecemberDate {
   constructor(date) {
     DecemberDate.#testPositiveIntRegex(date);
     DecemberDate.#validateInNumberRange(date, DecemberDate.MIN_DATE, DecemberDate.MAX_DATE);
+
     const parsedDate = DecemberDate.#parse(date);
 
     this.#date = parsedDate;

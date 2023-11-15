@@ -13,6 +13,7 @@ const ChristmasEvent = {
     const orders = await tryUntillSuccess(this.getOrdersFromUser)();
 
     const orderResult = this.getOrderResult(date, orders);
+
     this.printOrderResult(date, orderResult);
   },
 

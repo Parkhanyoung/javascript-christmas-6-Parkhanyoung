@@ -17,8 +17,8 @@ const EventApplier = {
       return { discount: null, giving: null };
     }
 
-    const result = this.calculateEventResult(visitDate, orders);
-    return result;
+    const eventResult = this.calculateDiscountAndGiving(visitDate, orders);
+    return eventResult;
   },
 
   isApplicable(orders) {
@@ -26,7 +26,7 @@ const EventApplier = {
     return orderAmount >= this.MIN_ORDER_AMOUNT;
   },
 
-  calculateEventResult(visitDate, orders) {
+  calculateDiscountAndGiving(visitDate, orders) {
     const countPerCategory = orders.getCountPerCategory();
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 
@@ -41,6 +41,7 @@ const EventApplier = {
     const christmasDdayDiscount = ChristmasDdayDiscount.apply(visitDate);
 
     const dailyDiscount = DailyDiscount.apply(visitDate, countPerCategory);
+    // dailyDiscount는 유형이 평일과 주말로 나뉘기 때문에 별도 처리
     const { type: dailyDiscountType, amount: dailyDiscountAmount } = dailyDiscount;
 
     const specialDiscount = SpecialDiscount.apply(visitDate);

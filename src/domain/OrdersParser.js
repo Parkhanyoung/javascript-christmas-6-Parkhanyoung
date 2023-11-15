@@ -3,8 +3,8 @@ import { ERROR_MESSAGE } from "../constants/messages.js";
 const OrdersParser = {
   parse(value) {
     this.validateIsString(value);
-    const parsed = this.splitByComma(value);
 
+    const parsed = this.splitByComma(value);
     return parsed;
   },
 

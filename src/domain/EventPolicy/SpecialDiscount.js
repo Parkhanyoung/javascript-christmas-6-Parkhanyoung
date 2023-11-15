@@ -5,12 +5,18 @@ const SpecialDiscount = {
 
   apply(visitDate) {
     const isApplicable = this.checkIsApplicable(visitDate);
-    return isApplicable ? this.DISCOUNT_AMOUNT : 0;
+
+    if (!isApplicable) {
+      return 0;
+    }
+
+    return this.DISCOUNT_AMOUNT;
   },
 
   checkIsApplicable(date) {
     const isSunday = this.checkIsSunday(date);
     const isChristmas = this.checkIsChristmas(date);
+
     return isSunday || isChristmas;
   },
 

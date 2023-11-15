@@ -9,10 +9,10 @@ const DailyDiscount = {
     const dessertCount = countPerCategory[MENU_CATEGORY.dessert] || 0;
     const mainCount = countPerCategory[MENU_CATEGORY.main] || 0;
 
-    const isWeekend = this.checkIsWeekend(visitDate);
     const weekdayDiscount = this.DISCOUNT_PER_MENU * dessertCount;
     const weekendDiscount = this.DISCOUNT_PER_MENU * mainCount;
 
+    const isWeekend = this.checkIsWeekend(visitDate);
     return isWeekend
       ? { type: EVENT_TYPE.weekendDiscount, amount: weekendDiscount }
       : { type: EVENT_TYPE.weekdayDiscount, amount: weekdayDiscount };
@@ -21,7 +21,9 @@ const DailyDiscount = {
   checkIsWeekend(date) {
     const day = date.getDay();
 
-    return day === DAY.friday || day === DAY.saturday;
+    const weekend = [DAY.friday, DAY.saturday];
+
+    return weekend.includes(day);
   },
 };
 

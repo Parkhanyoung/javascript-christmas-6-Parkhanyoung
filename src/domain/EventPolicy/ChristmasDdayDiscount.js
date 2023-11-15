@@ -12,7 +12,9 @@ const ChristmasDdayDiscount = {
     }
 
     const discountMultiplier = targetDate - this.START_DATE;
-    return this.INITIAL_DISCOUNT + this.DISCOUNT_INCREMENT * discountMultiplier;
+    const totalIncrement = this.DISCOUNT_INCREMENT * discountMultiplier;
+
+    return this.INITIAL_DISCOUNT + totalIncrement;
   },
 
   checkIsBeforeDday(date) {

@@ -50,15 +50,15 @@ class Order {
     Order.#validateNotLessThanMinCount(value);
   }
 
-  static #validateNotLessThanMinCount(value) {
-    if (Order.#MIN_COUNT > value) {
+  static #testPositiveIntRegex(input) {
+    const regex = /^[1-9]\d*$/;
+    if (!regex.test(input)) {
       throw new Error(ERROR_MESSAGE.invalidOrder);
     }
   }
 
-  static #testPositiveIntRegex(input) {
-    const regex = /^[1-9]\d*$/;
-    if (!regex.test(input)) {
+  static #validateNotLessThanMinCount(value) {
+    if (Order.#MIN_COUNT > value) {
       throw new Error(ERROR_MESSAGE.invalidOrder);
     }
   }

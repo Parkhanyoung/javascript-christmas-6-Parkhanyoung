@@ -46,6 +46,13 @@ class Receipt {
     return appliedBenefit;
   }
 
+  #getBenefitAmount() {
+    const benefit = this.#getAppliedBenefit();
+
+    const benefitAmount = sumObjectValues(benefit);
+    return benefitAmount;
+  }
+
   #getAmountAfterDiscount() {
     const { discount } = this.#eventResult;
     const discountAmount = sumObjectValues(discount);
@@ -53,13 +60,6 @@ class Receipt {
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
 
     return amountBeforeDiscount - discountAmount;
-  }
-
-  #getBenefitAmount() {
-    const benefit = this.#getAppliedBenefit();
-
-    const benefitAmount = sumObjectValues(benefit);
-    return benefitAmount;
   }
 
   #getBadge() {

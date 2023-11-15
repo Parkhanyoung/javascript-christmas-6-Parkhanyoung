@@ -48,26 +48,26 @@ class Orders {
     }
   }
 
-  static #countOrdersByMenuName(orders) {
-    return orders.reduce((countPerMenu, order) => {
-      const { menuName, count } = order.getDetail();
-      return { ...countPerMenu, [menuName]: count };
-    }, {});
-  }
-
-  static #countOrdersByCategory(orders) {
-    const countPerCategory = orders.reduce((countPerCategory, order) => {
-      const { category, count } = order.getDetail();
-      const existingCount = countPerCategory[category] || 0;
-      return { ...countPerCategory, [category]: existingCount + count };
-    }, {});
-
-    return countPerCategory;
+  static #getTotalOrderCount(orders) {
+    return orders.reduce((totalCount, order) => {
+      const { count } = order.getDetail();
+      return totalCount + count;
+    }, 0);
   }
 
   static #validateTotalOrderCount(count) {
-    if (count > Orders.#MAX_ORDER_COUNT) {
+    if (Orders.#MAX_ORDER_COUNT < count) {
       throw new Error(ERROR_MESSAGE.overMaxOrderCount(Orders.#MAX_ORDER_COUNT));
+    }
+  }
+
+  static #validateNotOnlyDrink(orders) {
+    const countPerCategory = this.#countOrdersByCategory(orders);
+    const categories = Object.keys(countPerCategory);
+
+    const isOnlyDrink = categories.length === 1 && categories[0] === MENU_CATEGORY.drink;
+    if (isOnlyDrink) {
+      throw new Error(ERROR_MESSAGE.invalidOrder);
     }
   }
 
@@ -77,25 +77,31 @@ class Orders {
       return menuName;
     });
 
-    if (new Set(menuNames).size !== menuNames.length) {
+    const hasDuplicate = new Set(menuNames).size !== menuNames.length;
+    if (hasDuplicate) {
       throw new Error(ERROR_MESSAGE.invalidOrder);
     }
   }
 
-  static #validateNotOnlyDrink(orders) {
-    const countPerCategory = this.#countOrdersByCategory(orders);
-    const categories = Object.keys(countPerCategory);
+  static #countOrdersByMenuName(orders) {
+    const countPerMenuName = orders.reduce((result, order) => {
+      const { menuName, count } = order.getDetail();
 
-    if (categories.length === 1 && categories[0] === MENU_CATEGORY.drink) {
-      throw new Error(ERROR_MESSAGE.invalidOrder);
-    }
+      return { ...result, [menuName]: count };
+    }, {});
+
+    return countPerMenuName;
   }
 
-  static #getTotalOrderCount(orders) {
-    return orders.reduce((acc, order) => {
-      const { count } = order.getDetail();
-      return acc + count;
-    }, 0);
+  static #countOrdersByCategory(orders) {
+    const countPerCategory = orders.reduce((result, order) => {
+      const { category, count } = order.getDetail();
+      const existingCount = result[category] || 0;
+
+      return { ...result, [category]: existingCount + count };
+    }, {});
+
+    return countPerCategory;
   }
 }
 

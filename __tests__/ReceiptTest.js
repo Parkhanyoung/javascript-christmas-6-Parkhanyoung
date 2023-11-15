@@ -31,12 +31,12 @@ describe("Recipt 클래스에 대한 테스트", () => {
     const result2 = {
       orderedMenu: { 티본스테이크: 1, 바비큐립: 1, 초코케이크: 2, 제로콜라: 1 },
       amountBeforeDiscount: 142_000,
-      gift: { name: "샴페인", count: 1 },
+      gift: { name: "샴페인", count: 1, price: 25_000 },
       appliedBenefit: {
         christmasDdayDiscount: 1200,
         weekdayDiscount: 4046,
         specialDiscount: 1000,
-        gift: 25000,
+        gift: 25_000,
       },
       benefitAmount: 31_246,
       amountAfterDiscount: 135_754,

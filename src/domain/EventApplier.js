@@ -7,19 +7,17 @@ import {
   BadgeGiving,
   GiftGiving,
 } from "./EventPolicy/index.js";
+import GiftExchanger from "./GiftExchanger.js";
 
 const EventApplier = {
   MIN_ORDER_AMOUNT: 10_000,
 
   apply(visitDate, orders) {
     if (!this.isApplicable(orders)) {
-      return {
-        dicount: null,
-        giving: null,
-      };
+      return { discount: null, giving: null };
     }
 
-    const result = this.getDiscountAndGiving(visitDate, orders);
+    const result = this.calculateEventResult(visitDate, orders);
     return result;
   },
 
@@ -28,7 +26,7 @@ const EventApplier = {
     return orderAmount >= this.MIN_ORDER_AMOUNT;
   },
 
-  getDiscountAndGiving(visitDate, orders) {
+  calculateEventResult(visitDate, orders) {
     const countPerCategory = orders.getCountPerCategory();
     const discount = this.calculateDiscount(visitDate, countPerCategory);
 
@@ -36,10 +34,7 @@ const EventApplier = {
     const discountAmount = sumObjectValues(discount);
     const giving = this.calculateGiving(orderAmount, discountAmount);
 
-    return {
-      discount,
-      giving,
-    };
+    return { discount, giving };
   },
 
   calculateDiscount(visitDate, countPerCategory) {
@@ -50,26 +45,18 @@ const EventApplier = {
 
     const specialDiscount = SpecialDiscount.apply(visitDate);
 
-    return {
-      christmasDdayDiscount,
-      [dailyDiscountType]: dailyDiscountAmount,
-      specialDiscount,
-    };
+    return { christmasDdayDiscount, [dailyDiscountType]: dailyDiscountAmount, specialDiscount };
   },
 
   calculateGiving(orderAmount, discountAmount) {
     const isGiftGiven = GiftGiving.apply(orderAmount);
+    const gift = GiftExchanger.exchange(isGiftGiven);
 
-    const GIFT_PRICE = PRICE_FOR_MENUNAME[MENU_NAME.champagne];
-
-    const giftAmount = isGiftGiven ? GIFT_PRICE : 0;
+    const giftAmount = isGiftGiven ? gift.price : 0;
     const benefitAmount = discountAmount + giftAmount;
     const badge = BadgeGiving.apply(benefitAmount);
 
-    return {
-      isGiftGiven,
-      badge,
-    };
+    return { gift, badge };
   },
 };
 

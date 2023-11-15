@@ -34,15 +34,13 @@ class Receipt {
   }
 
   #getGift() {
-    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
-
-    const gift = GiftExchanger.exchange(isGiftGiven);
+    const gift = this.#eventResult.giving?.gift || null;
     return gift;
   }
 
   #getAppliedBenefit() {
-    const { discount } = this.#eventResult;
-    const isGiftGiven = this.#eventResult.giving?.isGiftGiven;
+    const discount = this.#eventResult?.discount;
+    const isGiftGiven = Boolean(this.#getGift());
 
     const appliedBenefit = GiftExchanger.generateBenefitReport(discount, isGiftGiven);
     return appliedBenefit;
@@ -50,9 +48,9 @@ class Receipt {
 
   #getAmountAfterDiscount() {
     const { discount } = this.#eventResult;
+    const discountAmount = sumObjectValues(discount);
 
     const amountBeforeDiscount = this.#getAmountBeforeDiscount();
-    const discountAmount = sumObjectValues(discount);
 
     return amountBeforeDiscount - discountAmount;
   }
@@ -65,12 +63,7 @@ class Receipt {
   }
 
   #getBadge() {
-    const badge = this.#eventResult.giving?.badge;
-
-    if (!badge) {
-      return null;
-    }
-
+    const badge = this.#eventResult.giving?.badge || null;
     return badge;
   }
 }

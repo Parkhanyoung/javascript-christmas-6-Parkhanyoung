@@ -8,14 +8,11 @@ const GiftExchanger = {
   },
 
   exchange(isGiftGiven) {
-    const { name, count } = this.GIFT;
-
     if (!isGiftGiven) {
       return null;
     }
 
-    const gift = { name, count };
-    return gift;
+    return this.GIFT;
   },
 
   generateBenefitReport(discount, isGiftGiven) {

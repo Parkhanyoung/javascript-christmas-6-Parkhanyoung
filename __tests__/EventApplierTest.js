@@ -10,7 +10,7 @@ describe("EventApplier 객체에 대한 테스트", () => {
 
     test.each([ORDERS_1, ORDERS_2, ORDERS_3])("Case %#", (orders) => {
       expect(EventApplier.apply(new Date("2023-12-12"), orders)).toEqual({
-        dicount: null,
+        discount: null,
         giving: null,
       });
     });
@@ -27,7 +27,7 @@ describe("EventApplier 객체에 대한 테스트", () => {
           specialDiscount: 0,
         },
         giving: {
-          isGiftGiven: false,
+          gift: null,
           badge: null,
         },
       },
@@ -47,7 +47,7 @@ describe("EventApplier 객체에 대한 테스트", () => {
           specialDiscount: 1000,
         },
         giving: {
-          isGiftGiven: false,
+          gift: null,
           badge: "트리",
         },
       },
@@ -68,7 +68,11 @@ describe("EventApplier 객체에 대한 테스트", () => {
           specialDiscount: 1000,
         },
         giving: {
-          isGiftGiven: true,
+          gift: {
+            count: 1,
+            name: "샴페인",
+            price: 25_000,
+          },
           badge: "산타",
         },
       },
